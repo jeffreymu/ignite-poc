@@ -8,18 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
 public class IgniteSimpleHandler {
 
-    private final static String CITY_CACHE = "SQL_PUBLIC_CITY";
+    private final static String CITY_CACHE = "SQL_PUBLIC_MYCITY";
     private final static String PERSON_CACHE = "SQL_PUBLIC_PERSON";
 
     @Autowired
     private Ignite ignite;
 
-    private IgniteCache cityCache;
+    private IgniteCache myCityCache;
     private IgniteCache personCache;
 
     @PostConstruct
@@ -28,7 +29,7 @@ public class IgniteSimpleHandler {
             log.error("Can't connect to ignite cache");
             throw new RuntimeException("Found nothing ignite cache");
         }
-        this.cityCache = ignite.cache(CITY_CACHE);
+        this.myCityCache = ignite.cache(CITY_CACHE);
         this.personCache = ignite.cache(PERSON_CACHE);
     }
 
@@ -37,7 +38,7 @@ public class IgniteSimpleHandler {
         try (Ignite ignite = Ignition.start()) {
             Ignition.setClientMode(true);
             log.info("Ignite client is started.");
-            this.cityCache = ignite.cache(CITY_CACHE);
+            this.myCityCache = ignite.cache(CITY_CACHE);
             this.personCache = ignite.cache(PERSON_CACHE);
             // query cache of testing data
             doQuery();
@@ -47,25 +48,27 @@ public class IgniteSimpleHandler {
     }
 
     public void doInsert() {
-        IgniteDataHelper.cleanup(cityCache, personCache);
-        IgniteDataHelper.insertData(cityCache, personCache);
+        IgniteDataHelper.cleanup(myCityCache, personCache);
+        IgniteDataHelper.insertData(myCityCache, personCache);
     }
 
     public void doQuery() {
-        IgniteDataHelper.queryData(cityCache);
+        IgniteDataHelper.queryData(myCityCache);
     }
 
     public void doUpdate() {
-        IgniteDataHelper.updateData(cityCache);
+        IgniteDataHelper.updateData(myCityCache);
     }
 
     public void doRemove() {
-        IgniteDataHelper.removeData(cityCache);
+        IgniteDataHelper.removeData(myCityCache);
     }
 
     public static void main(String[] args) throws InterruptedException {
         IgniteSimpleHandler handler = new IgniteSimpleHandler();
         handler.init();
+
+        TimeUnit.SECONDS.sleep(30);
     }
 
 }
