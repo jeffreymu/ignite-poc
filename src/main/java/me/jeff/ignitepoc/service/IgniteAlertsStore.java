@@ -7,7 +7,6 @@ import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
 import org.apache.ignite.cache.query.SqlFieldsQuery;
 import org.apache.ignite.cache.query.SqlQuery;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.cache.Cache;
@@ -19,7 +18,7 @@ import java.util.stream.Collectors;
 @Component
 public class IgniteAlertsStore implements AlertsStore {
 
-    @Autowired
+//    @Autowired
     private Ignite ignite;
 
     @Override

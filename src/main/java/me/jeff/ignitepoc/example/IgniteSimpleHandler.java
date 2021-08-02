@@ -4,11 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
 import org.apache.ignite.Ignition;
+import org.apache.ignite.client.ClientCache;
+import org.apache.ignite.client.IgniteClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
@@ -17,24 +18,33 @@ public class IgniteSimpleHandler {
     private final static String CITY_CACHE = "SQL_PUBLIC_MYCITY";
     private final static String PERSON_CACHE = "SQL_PUBLIC_PERSON";
 
-    @Autowired
     private Ignite ignite;
+    private IgniteClient igniteClient;
 
     private IgniteCache myCityCache;
     private IgniteCache personCache;
 
+    private ClientCache myCityClientCache;
+    private ClientCache personClientCache;
+
+    @Autowired
+    public IgniteSimpleHandler(IgniteClient igniteClient) {
+        this.igniteClient = igniteClient;
+    }
+
     @PostConstruct
     public void initCache() {
-        if (ignite == null) {
+        if (igniteClient == null) {
             log.error("Can't connect to ignite cache");
             throw new RuntimeException("Found nothing ignite cache");
         }
-        this.myCityCache = ignite.cache(CITY_CACHE);
-        this.personCache = ignite.cache(PERSON_CACHE);
+        this.myCityClientCache = igniteClient.cache(CITY_CACHE);
+        this.personClientCache = igniteClient.cache(PERSON_CACHE);
+        log.info("Started the ignite thin client");
     }
 
+    @Deprecated
     public void init() {
-
         try (Ignite ignite = Ignition.start()) {
             Ignition.setClientMode(true);
             log.info("Ignite client is started.");
@@ -64,11 +74,15 @@ public class IgniteSimpleHandler {
         IgniteDataHelper.removeData(myCityCache);
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        IgniteSimpleHandler handler = new IgniteSimpleHandler();
-        handler.init();
+    /***********************************************************************/
 
-        TimeUnit.SECONDS.sleep(30);
+    public void doClientInsert() {
+        IgniteClientDataHelper.cleanup(myCityClientCache, personClientCache);
+        IgniteClientDataHelper.insertData(myCityClientCache, personClientCache);
+    }
+
+    public void doClientQuery() {
+        IgniteClientDataHelper.queryData(myCityClientCache);
     }
 
 }
