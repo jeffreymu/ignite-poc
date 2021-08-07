@@ -3,6 +3,7 @@ server:
   port: 9009
 
 ignite:
+  useLocal: true
   remote:
     host: 10.190.0.25:10800
   login:

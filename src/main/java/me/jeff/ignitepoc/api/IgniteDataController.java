@@ -1,7 +1,7 @@
 package me.jeff.ignitepoc.api;
 
 import lombok.extern.slf4j.Slf4j;
-import me.jeff.ignitepoc.example.IgniteSimpleHandler;
+import me.jeff.ignitepoc.handler.IgniteSimpleHandler;
 import me.jeff.ignitepoc.model.CityDTO;
 import me.jeff.ignitepoc.service.SqlDataService;
 import org.springframework.beans.factory.annotation.Autowired;

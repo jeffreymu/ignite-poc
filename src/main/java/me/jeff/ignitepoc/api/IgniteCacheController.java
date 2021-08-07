@@ -3,7 +3,7 @@ package me.jeff.ignitepoc.api;
 import lombok.extern.slf4j.Slf4j;
 import me.jeff.ignitepoc.cache.StockCache;
 import me.jeff.ignitepoc.common.MoIResponse;
-import me.jeff.ignitepoc.example.IgniteCacheHandler;
+import me.jeff.ignitepoc.handler.IgniteCacheHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
