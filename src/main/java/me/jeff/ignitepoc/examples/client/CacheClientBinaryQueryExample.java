@@ -59,7 +59,7 @@ public class CacheClientBinaryQueryExample {
      * @param args Command line arguments, none required.
      */
     public static void main(String[] args) {
-        try (Ignite ignite = Ignition.start("config/example-ignite.xml")) {
+        try (Ignite ignite = Ignition.start("config/example-cache.xml")) {
             System.out.println();
             System.out.println(">>> Binary objects cache query example started.");
 

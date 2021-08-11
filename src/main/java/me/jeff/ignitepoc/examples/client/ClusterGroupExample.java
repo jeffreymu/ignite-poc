@@ -41,7 +41,7 @@ public class ClusterGroupExample {
      * @throws IgniteException If example execution failed.
      */
     public static void main(String[] args) throws IgniteException {
-        try (Ignite ignite = Ignition.start("config/example-ignite.xml")) {
+        try (Ignite ignite = Ignition.start("config/example-cache.xml")) {
             if (!ExamplesUtils.checkMinTopologySize(ignite.cluster(), 2))
                 return;
 

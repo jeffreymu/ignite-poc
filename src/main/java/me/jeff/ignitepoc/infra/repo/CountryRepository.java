@@ -12,5 +12,5 @@ import java.util.List;
 @Repository
 public interface CountryRepository extends IgniteRepository<Country, String> {
 
-    public List<Cache.Entry<String, Country>> findByPopulationGreaterThanEqualOrderByPopulationDesc(int population);
+    List<Cache.Entry<String, Country>> findByPopulationGreaterThanEqualOrderByPopulationDesc(int population);
 }

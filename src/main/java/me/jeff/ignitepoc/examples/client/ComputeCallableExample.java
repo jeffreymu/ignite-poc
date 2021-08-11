@@ -46,7 +46,7 @@ public class ComputeCallableExample {
      * @throws IgniteException If example execution failed.
      */
     public static void main(String[] args) throws IgniteException {
-        try (Ignite ignite = Ignition.start("config/example-ignite.xml")) {
+        try (Ignite ignite = Ignition.start("config/example-cache.xml")) {
             System.out.println();
             System.out.println(">>> Compute callable example started.");
 

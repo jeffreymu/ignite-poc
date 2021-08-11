@@ -3,11 +3,14 @@ package me.jeff.ignitepoc.api;
 import lombok.extern.slf4j.Slf4j;
 import me.jeff.ignitepoc.handler.IgniteSimpleHandler;
 import me.jeff.ignitepoc.model.CityDTO;
+import me.jeff.ignitepoc.model.CountryDTO;
 import me.jeff.ignitepoc.service.SqlDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -47,6 +50,10 @@ public class IgniteDataController {
         return service.getCityByID(id);
     }
 
+    @GetMapping("/api/countries")
+    public List<CountryDTO> getCountriesByPopulation(@RequestParam(value = "id", required = true) int id) {
+        return service.getCountriesByPopulation(id);
+    }
 
     @GetMapping("/api/cache/queryClient")
     public void queryClientData() {

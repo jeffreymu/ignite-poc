@@ -48,7 +48,7 @@ public class ComputeClientBinaryTaskExecutionExample {
      * @param args Command line arguments, none required.
      */
     public static void main(String[] args) {
-        try (Ignite ignite = Ignition.start("config/example-ignite.xml")) {
+        try (Ignite ignite = Ignition.start("config/example-cache.xml")) {
             System.out.println();
             System.out.println(">>> Binary objects task execution example started.");
 
