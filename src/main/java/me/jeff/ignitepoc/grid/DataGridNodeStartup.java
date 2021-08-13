@@ -13,7 +13,13 @@ public final class DataGridNodeStartup {
         log.info("Ignite data node is startup " + ignite.name());
     }
 
+
+    public static void startup_p_node() {
+        Ignite ignite = Ignition.start("config/example-persistent-store.xml");
+        log.info("Ignite data node is startup " + ignite.name());
+    }
+
     public static void main(String[] args) throws IgniteException {
-        DataGridNodeStartup.startup();
+        DataGridNodeStartup.startup_p_node();
     }
 }

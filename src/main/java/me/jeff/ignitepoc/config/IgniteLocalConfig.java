@@ -14,9 +14,33 @@ public class IgniteLocalConfig {
 
     @Bean
     public Ignite igniteInstance() {
-        String cfgPath = "config/example-cache.xml";
+        String cfgPath = "config/example-persistent-store.xml";
         Ignite ignite = Ignition.start(cfgPath);
         log.info("Ignite data node is startup " + ignite.name());
+
+//        // cache configuration
+//        CacheConfiguration alerts=new CacheConfiguration();
+//        alerts.setCopyOnRead(false);
+//        // as we have one node for now
+//        alerts.setBackups(1);
+//        alerts.setAtomicityMode(CacheAtomicityMode.ATOMIC);
+//        alerts.setName(CacheNames.Alerts.name());
+//        alerts.setDataRegionName("AlertRegionConfiguration");
+//        alerts.setWriteSynchronizationMode(CacheWriteSynchronizationMode.FULL_ASYNC);
+//        alerts.setIndexedTypes(String.class,AlertEntry.class);
+//
+//        CacheConfiguration alertsConfig=new CacheConfiguration();
+//        alertsConfig.setCopyOnRead(false);
+//        // as we have one node for now
+//        alertsConfig.setBackups(1);
+//        alertsConfig.setAtomicityMode(CacheAtomicityMode.ATOMIC);
+//        alertsConfig.setName(CacheNames.AlertsConfig.name());
+//        alertsConfig.setIndexedTypes(String.class,AlertConfigEntry.class);
+//        alertsConfig.setDataRegionName("AlertRegionConfiguration");
+//        alertsConfig.setWriteSynchronizationMode(CacheWriteSynchronizationMode.FULL_ASYNC);
+//
+//        ignite.getOrCreateCache(alerts);
+//        ignite.getOrCreateCache(alertsConfig);
         return ignite;
     }
 

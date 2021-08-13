@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class IgniteClientConfig {
+
     private final static String IGNITE_LOCAL_ADDRESS = "127.0.0.1:10800";
 
     @Value("${ignite.remote.host}")

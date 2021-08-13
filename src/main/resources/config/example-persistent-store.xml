@@ -22,14 +22,24 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="ignite.cfg" class="org.apache.ignite.configuration.IgniteConfiguration">
+        <property name="peerClassLoadingEnabled" value="true"/>
+        <property name="authenticationEnabled" value="false"/>
         <!-- Enabling Apache Ignite Persistent Store. -->
         <property name="dataStorageConfiguration">
             <bean class="org.apache.ignite.configuration.DataStorageConfiguration">
+                <!-- set the size of wal segments to 128MB -->
+                <!--<property name="walSegmentSize" value="#{128 * 1024 * 1024}"/>-->
+                <property name="pageSize" value="#{4 * 1024}"/>
                 <property name="defaultDataRegionConfiguration">
                     <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
                         <property name="persistenceEnabled" value="true"/>
+                        <property name="name" value="20GB_Region"/>
+                        <property name="initialSize" value="#{200L * 1024 * 1024}"/>
+                        <property name="maxSize" value="#{500L  * 1024 * 1024}"/>
+                        <property name="pageEvictionMode" value="RANDOM_LRU"/>
                     </bean>
                 </property>
+                <property name="storagePath" value="D:/storage"/>
             </bean>
         </property>
 
@@ -39,10 +49,11 @@
                 <property name="ipFinder">
                     <!-- Uncomment static IP finder to enable static-based discovery of initial nodes. -->
                     <!--<bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.vm.TcpDiscoveryVmIpFinder">-->
-                    <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.multicast.TcpDiscoveryMulticastIpFinder">
+                    <bean class="org.apache.ignite.spi.discovery.tcp.ipfinder.vm.TcpDiscoveryVmIpFinder">
                         <property name="addresses">
                             <list>
                                 <!-- In distributed environment, replace with actual host IP address. -->
+                                <!--<value>10.190.0.25:47500..47502</value>-->
                                 <value>127.0.0.1:47500..47502</value>
                             </list>
                         </property>

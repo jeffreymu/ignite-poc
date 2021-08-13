@@ -41,6 +41,7 @@
                 <property name="defaultDataRegionConfiguration">
                     <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
                         <property name="name" value="Default_Region"/>
+                        <property name="persistenceEnabled" value="true"/>
                         <!-- 100 MB memory region with disabled eviction -->
                         <property name="initialSize" value="#{100 * 1024 * 1024}"/>
                     </bean>

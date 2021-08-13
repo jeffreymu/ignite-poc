@@ -2,7 +2,6 @@ package me.jeff.ignitepoc.service;
 
 import lombok.extern.slf4j.Slf4j;
 import me.jeff.ignitepoc.model.AlertEntry;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.UUID;
 @Service
 public class AlertsService {
 
-    @Autowired
+//    @Autowired
     private AlertsStore alertsStore;
 
     public void createAlertEntry(AlertEntry alertEntry) {
