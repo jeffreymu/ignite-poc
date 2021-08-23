@@ -33,13 +33,15 @@
                 <property name="defaultDataRegionConfiguration">
                     <bean class="org.apache.ignite.configuration.DataRegionConfiguration">
                         <property name="persistenceEnabled" value="true"/>
-                        <property name="name" value="20GB_Region"/>
+                        <property name="metricsEnabled" value="true"/>
+                        <property name="name" value="500MB_Region"/>
                         <property name="initialSize" value="#{200L * 1024 * 1024}"/>
                         <property name="maxSize" value="#{500L  * 1024 * 1024}"/>
-                        <property name="pageEvictionMode" value="RANDOM_LRU"/>
+                        <property name="pageEvictionMode" value="RANDOM_2_LRU"/>
                     </bean>
                 </property>
                 <property name="storagePath" value="D:/storage"/>
+                <property name="metricsEnabled" value="true"/>
             </bean>
         </property>
 

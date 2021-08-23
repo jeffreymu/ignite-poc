@@ -15,6 +15,7 @@ public class IgniteLocalConfig {
     @Bean
     public Ignite igniteInstance() {
         String cfgPath = "config/example-persistent-store.xml";
+        Ignition.setClientMode(true);
         Ignite ignite = Ignition.start(cfgPath);
         log.info("Ignite data node is startup " + ignite.name());
 
