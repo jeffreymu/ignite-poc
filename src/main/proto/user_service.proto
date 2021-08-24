@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "user_dto.proto";
+
+option java_multiple_files = true;
+
+package me.jeff.ignitepoc.grpc.user.dto;
+
+option java_package = "me.jeff.ignitepoc.grpc.user.service";
+
+option java_outer_classname = "UserProto";
+
+service User {
+
+  rpc list (SearchUserRequest) returns (stream UserResponse) {}
+  rpc add (AddUserRequest) returns (UserResponse) {}
+
+}
