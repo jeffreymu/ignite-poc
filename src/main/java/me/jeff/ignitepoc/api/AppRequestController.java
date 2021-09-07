@@ -2,6 +2,7 @@ package me.jeff.ignitepoc.api;
 
 import lombok.extern.slf4j.Slf4j;
 import me.jeff.ignitepoc.common.MoIResponse;
+import me.jeff.ignitepoc.queue.translator.CrossingOrderMain;
 import me.jeff.ignitepoc.service.IgniteCompleteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,9 @@ public class AppRequestController {
 
     @Autowired
     IgniteCompleteService igniteCompleteService;
+
+    @Autowired
+    CrossingOrderMain crossingOrderMain;
 
     @GetMapping("/api/demo")
     public void testing() {
@@ -46,5 +50,13 @@ public class AppRequestController {
     public MoIResponse subscribe(@RequestParam String cacheName, @RequestParam String code) {
         igniteCompleteService.subscribeForDataUpdates();
         return new MoIResponse("OK", null);
+    }
+
+    @RequestMapping(value = "/api/crossingOrder", method = RequestMethod.GET, produces = "application/json")
+    public void crossingOrder(@RequestParam String orderId) {
+
+        log.info("***********Crossing order testing***********");
+        crossingOrderMain.createOne(orderId);
+
     }
 }
