@@ -1,5 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea
+.evosuite
 ignite
 target
 ignite-poc.iml
+.evosuite/
